@@ -1,4 +1,4 @@
-# Hot Pink Hours 💗
+# Hot Girl Schedule 💗
 
 A one-tap, whole-day time tracker: switch activities with one tap, log what you did *while* on a shift, drill, commute or gym session, compare your planned schedule with what actually happened, and see where your hours go on a dashboard.
 
