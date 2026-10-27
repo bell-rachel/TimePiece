@@ -1,0 +1,10 @@
+{
+  "name": "Hot Pink Hours",
+  "short_name": "Pink Hours",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#FFF1F7",
+  "theme_color": "#FF2E8A",
+  "icons": [{ "src": "icon.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }]
+}
