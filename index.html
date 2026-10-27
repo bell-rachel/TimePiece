@@ -11,7 +11,7 @@
 <link rel="apple-touch-icon" href="icon.png">
 <link rel="icon" href="icon.png">
 <link rel="manifest" href="manifest.webmanifest">
-<title>Hot Pink Hours</title>
+<title>Hot Girl Schedule</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Shrikhand&display=swap">
@@ -233,7 +233,7 @@ details.fold > summary{cursor:pointer; font-weight:800; color:var(--ink-soft); p
 
 <div class="shell">
   <header class="top">
-    <h1 class="brand">hot pink hours<small id="todayline">&nbsp;</small></h1>
+    <h1 class="brand">hot girl schedule<small id="todayline">&nbsp;</small></h1>
     <nav class="toptabs" aria-label="Sections">
       <button class="tab" data-go="now">Now</button>
       <button class="tab tab-day-btn" data-go="day">Day</button>
@@ -477,7 +477,7 @@ function render(){
 }
 function gate(){
   if (S.auth === "unconfigured") return `<div class="card empty"><div class="big">Almost there 💗</div><p class="muted">Paste your Supabase Project URL and anon key into the top of the script in index.html, then reload.</p></div>`;
-  if (S.auth === "signedout") return `<div class="card" style="max-width:420px;margin:24px auto"><h2 class="vt">Sign in</h2><form id="login-form"><div class="field"><label for="li-email">Email</label><input class="in" id="li-email" type="email" autocomplete="username" required></div><div class="field"><label for="li-pass">Password</label><input class="in" id="li-pass" type="password" autocomplete="current-password" required></div><div class="warnline" id="li-warn"></div><button class="btn primary" type="submit" style="width:100%">Sign in</button></form></div>`;
+  if (S.auth === "signedout") return `<div class="card" style="max-width:420px;margin:24px auto"><h2 class="vt">Sign in</h2><form id="login-form"><div class="field"><label for="li-email">Email</label><input class="in" id="li-email" type="email" autocomplete="username" autocapitalize="none" autocorrect="off" spellcheck="false" required></div><div class="field"><label for="li-pass">Password</label><input class="in" id="li-pass" type="password" autocomplete="current-password" required></div><div class="warnline" id="li-warn"></div><button class="btn primary" type="submit" style="width:100%">Sign in</button></form></div>`;
   if (S.auth !== "in") return `<div class="card empty"><div class="big">Loading…</div></div>`;
   if (!S.cfgLoaded || !S.daysLoaded) return `<div class="card empty"><div class="big">Loading your day…</div><p class="muted">Syncing your activities and entries.</p></div>`;
   if (!S.config) return `<div class="card empty"><div class="big">Nothing set up yet</div><p class="muted">Start with your activities, projects and class/gym/tutoring schedule. You can change everything later in Setup.</p><button class="btn primary" data-seed>Set up my defaults</button></div>`;
@@ -1011,7 +1011,7 @@ document.addEventListener("change", ev => {
 document.addEventListener("submit", ev => {
   ev.preventDefault();
   if (ev.target.id === "login-form"){ const email = $("li-email").value.trim(), password = $("li-pass").value; $("li-warn").textContent = "";
-    sb.auth.signInWithPassword({email, password}).then(({error}) => { if (error) $("li-warn").textContent = "That email and password didn't match. Try again."; }); return; }
+    sb.auth.signInWithPassword({email, password}).then(({error}) => { if (error){ const m = error.message || String(error); $("li-warn").textContent = /invalid login/i.test(m) ? "Supabase says: Invalid login credentials. Check the email/password, and that this user exists in the same project as your keys." : /not confirmed/i.test(m) ? "Supabase says: Email not confirmed. Confirm the user in Authentication ▸ Users." : /api key|apikey|jwt/i.test(m) ? "Supabase says: "+m+". Your URL or key at the top of index.html doesn't match a project." : "Supabase says: "+m; console.error(error); } }).catch(e => { $("li-warn").textContent = "Couldn't reach Supabase: "+(e && e.message || e)+". Check SUPABASE_URL."; }); return; }
   if (ev.target.id === "proj-form"){ const n = $("proj-name").value.trim(); if (!n) return; writeConfig(cf => { cf.projects.push({id:"j"+uid(), name:n, archived:false}); }); toast("Added "+n); }
   if (ev.target.id === "due-form"){ const task = $("due-task").value.trim(); if (!task) return; const project = $("due-proj").value, due = $("due-date").value;
     writeDue(d => { d.items.push({id:"d"+uid(), task, project, due, done:false, doneAt:null}); }); toast("Due out added"); }
